@@ -13,7 +13,11 @@ export default defineConfig(() => {
           format === "es" ? `${libName}.mjs` : `${libName}.js`,
       },
       rollupOptions: {
-        external: ["axios"],
+        external: ["axios", "storyblok-js-client"],
+        output: {
+          globals: {
+            "storyblok-js-client": "storyblokJsClient"
+        }
       },
     },
   };

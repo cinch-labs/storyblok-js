@@ -10,13 +10,15 @@ import {
 const bridgeLatest = "https://app.storyblok.com/f/storyblok-v2-latest.js";
 
 export const useStoryblokBridge = (
-  id: Number,
+  id: number,
   cb: (newStory: StoryData) => void,
   options: StoryblokBridgeConfigV2 = {}
 ) => {
   if (typeof window === "undefined") {
     return;
   }
+
+
 
   if (typeof window.storyblokRegisterEvent === "undefined") {
     console.error(
@@ -32,7 +34,7 @@ export const useStoryblokBridge = (
   }
 
   window.storyblokRegisterEvent(() => {
-    const sbBridge: StoryblokBridgeV2 = new window.StoryblokBridge(options);
+    const sbBridge = new window.StoryblokBridge(options);
     sbBridge.on(["input", "published", "change"], (event) => {
       if (event.action == "input" && event.story.id === id) {
         cb(event.story);
